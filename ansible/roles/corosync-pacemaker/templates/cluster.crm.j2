@@ -1,0 +1,20 @@
+property no-quorum-policy="freeze" \
+  stonith-enabled="false" \
+  crmd-transition-delay="2s" \
+  pe-warn-series-max="1000" \
+  pe-input-series-max="1000" \
+  pe-error-series-max="1000" \
+  cluster-recheck-interval="5min"
+
+rsc_defaults resource-stickiness="INFINITY" \
+  migration-threshold="1"
+
+primitive p_vip ocf:heartbeat:IPaddr2 \
+  params ip="{{ cluster_virtual_ip }}" cidr_netmask="24" \
+  op monitor interval="30s"
+
+primitive p_haproxy ocf:heartbeat:haproxy \
+  params conffile=/etc/haproxy/haproxy.cfg \
+  op monitor interval="30s"
+
+group g_services p_vip p_haproxy

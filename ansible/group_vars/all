@@ -1,0 +1,38 @@
+---
+# Common settings
+
+cluster_virtual_ip: 10.0.0.84
+
+cluster_server_count: 3
+cluster_server_ips:
+  - 10.0.0.81
+  - 10.0.0.82
+  - 10.0.0.83
+
+cluster_interconnect_ips:
+  - 10.0.1.81
+  - 10.0.1.82
+  - 10.0.1.83
+
+cluster_servers:
+  - ip: 10.0.0.80
+    name: starter.local starter
+  - ip: "{{ cluster_server_ips[0] }}"
+    name: sv1.local sv1
+  - ip: "{{ cluster_server_ips[1] }}"
+    name: sv2.local sv2
+  - ip: "{{ cluster_server_ips[2] }}"
+    name: sv3.local sv3
+  - ip: "{{ cluster_virtual_ip }}"
+    name: sv.local sv
+
+nginx_cluster_servers:
+  - ip: "{{ cluster_server_ips[0] }}"
+    port: 10081
+    name: sv1
+  - ip: "{{ cluster_server_ips[1] }}"
+    port: 10082
+    name: sv2
+  - ip: "{{ cluster_server_ips[2] }}"
+    port: 10083
+    name: sv3

@@ -1,0 +1,5 @@
+127.0.0.1       localhost
+
+{% for item in cluster_servers %}
+{{ item.ip }}  {{ item.name }}
+{% endfor %}

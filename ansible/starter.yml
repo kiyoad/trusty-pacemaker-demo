@@ -1,0 +1,8 @@
+---
+# Corosync+Pacemaker+HAProxy cluster starter
+
+- hosts: starter
+  roles:
+    - common
+    - starter
+  sudo: yes

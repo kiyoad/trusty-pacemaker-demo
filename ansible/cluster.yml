@@ -1,0 +1,14 @@
+---
+# Corosync+Pacemaker+HAProxy cluster servers
+
+- hosts:
+    - sv1
+    - sv2
+    - sv3
+  roles:
+    - common
+    - cluster
+    - demo-nginx
+    - haproxy
+    - corosync-pacemaker
+  sudo: yes

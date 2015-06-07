@@ -1,0 +1,15 @@
+---
+# Setup HAProxy
+
+- name: Install HAProxy
+  apt: name=haproxy
+
+- name: Create OCF directory
+  file: path=/usr/lib/ocf/resource.d/heartbeat state=directory mode=0755
+
+- name: Install HAProxy OCF file
+  # https://github.com/stackforge/fuel-library/blob/master/deployment/puppet/cluster/files/haproxy
+  copy: src=haproxy dest=/usr/lib/ocf/resource.d/heartbeat/haproxy owner=root group=root mode=0755
+
+- name: Install HAProxy config file
+  template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg

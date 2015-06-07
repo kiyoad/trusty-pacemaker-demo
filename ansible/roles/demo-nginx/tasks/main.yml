@@ -1,0 +1,14 @@
+---
+# Setup nginx for demo
+
+- name: Install nginx
+  apt: name=nginx
+
+- name: Send nginx config
+  template: src=default.j2 dest=/etc/nginx/sites-available/default
+
+- name: Send index.html
+  template: src=index.html.j2 dest=/usr/share/nginx/html/index.html
+
+- name: Restart nginx
+  service: name=nginx enabled=yes state=restarted

@@ -1,0 +1,5 @@
+---
+# Setup Corosync+Pacemaker+HAProxy cluster server
+
+- name: Add authorized key
+  authorized_key: user=vagrant key="{{ lookup('file', 'cluster_id_rsa.pub') }}"

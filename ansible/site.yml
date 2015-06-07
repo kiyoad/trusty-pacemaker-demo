@@ -1,0 +1,5 @@
+---
+# Deploy Corosync+Pacemaker+HAProxy cluster
+
+- include: cluster.yml
+- include: starter.yml

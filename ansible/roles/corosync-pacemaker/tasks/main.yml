@@ -1,0 +1,31 @@
+---
+# Setup Corosync and Pacemaker
+
+- name: Install Corosync and Pacemaker
+  apt: name=pacemaker
+
+- name: Send libqb0 deb package
+  copy: src=libqb0_0.17.1-3_amd64.deb dest=/tmp/libqb0_0.17.1-3_amd64.deb
+
+- name: Update libqb0
+  apt: deb=/tmp/libqb0_0.17.1-3_amd64.deb
+
+- name: Send corosync.conf
+  template: src=corosync.conf.j2 dest=/etc/corosync/corosync.conf
+
+- name: Send /etc/default/corosync
+  copy: src=corosync dest=/etc/default/corosync
+
+- name: Restart corosync
+  service: name=corosync enabled=yes state=restarted
+
+- name: Restart pacemaker
+  service: name=pacemaker enabled=yes state=restarted
+
+- name: Send crm settings
+  template: src=cluster.crm.j2 dest=/tmp/cluster.crm
+  when: require_crm_settings
+
+- name: Register crm settings
+  shell: crm configure load update /tmp/cluster.crm
+  when: require_crm_settings

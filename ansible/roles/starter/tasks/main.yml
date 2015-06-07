@@ -1,0 +1,8 @@
+---
+# Setup starter
+
+- name: Install private-key
+  copy: src=cluster_id_rsa dest=/home/vagrant/.ssh/cluster_id_rsa owner=vagrant group=vagrant mode=0600
+
+- name: Install ssh/config
+  copy: src=config dest=/home/vagrant/.ssh/config owner=vagrant group=vagrant mode=0600

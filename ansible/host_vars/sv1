@@ -1,0 +1,6 @@
+---
+# Host specific settings
+
+my_interconnect_ip: "{{ cluster_interconnect_ips[0] }}"
+nginx_listen_port: "{{ nginx_cluster_servers[0].port }}"
+require_crm_settings: False
